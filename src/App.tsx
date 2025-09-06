@@ -562,12 +562,7 @@ function App() {
             {/* Full Version Card */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="p-6">
-                <img 
-                  src={appImage} 
-                  alt="Animal Tales Full Version" 
-                  className="w-full rounded-lg mb-6"
-                />
-                <h3 className="text-xl font-bold text-amber-800 mb-3">Full Version</h3>
+                <h3 className="text-3xl font-bold text-amber-800 mb-6 text-center">Full Version</h3>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2">
                     <CheckIcon className="w-4 h-4 text-green-500" />
@@ -606,12 +601,7 @@ function App() {
             {/* Trial Version Card */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="p-6">
-                <img 
-                  src={appImage} 
-                  alt="Animal Tales Trial Version" 
-                  className="w-full rounded-lg mb-6"
-                />
-                <h3 className="text-xl font-bold text-amber-800 mb-3">Trial Version</h3>
+                <h3 className="text-3xl font-bold text-amber-800 mb-6 text-center">Trial Version</h3>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2">
                     <CheckIcon className="w-4 h-4 text-green-500" />
@@ -650,12 +640,7 @@ function App() {
             {/* Trial Image Card */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="p-6 flex flex-col h-full">
-                <img 
-                  src={appImage} 
-                  alt="Animal Tales Preview" 
-                  className="w-full rounded-lg mb-6"
-                />
-                <h3 className="text-xl font-bold text-amber-800 mb-3">Trial Image</h3>
+                <h3 className="text-3xl font-bold text-amber-800 mb-6 text-center">Trial Image</h3>
                 <div className="space-y-2 mb-6 flex-1">
                   <div className="flex items-center gap-2">
                     <CheckIcon className="w-4 h-4 text-green-500" />
