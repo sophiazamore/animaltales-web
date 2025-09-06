@@ -6,7 +6,7 @@ import bookImage from './assets/Book Selling 2.png'
 import lyceImage from './assets/lyce.jpg'
 import sophiaAndDocImage from './assets/sophia_and_doc.jpeg'
 import appImage from './assets/app_image.png'
-import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
+import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon, BookOpenIcon, AcademicCapIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,6 +21,14 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const [contactFormData, setContactFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isContactSubmitting, setIsContactSubmitting] = useState(false)
+  const [contactSubmitStatus, setContactSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const scrollToOrderBook = () => {
     const element = document.getElementById('order-book')
@@ -49,9 +57,58 @@ function App() {
     element?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact')
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleContactInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setContactFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsContactSubmitting(true)
+    setContactSubmitStatus('idle')
+
+    try {
+      const response = await fetch('https://formspree.io/f/mvgbdgql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactFormData.name,
+          email: contactFormData.email,
+          subject: contactFormData.subject,
+          message: contactFormData.message,
+          formType: 'contact'
+        }),
+      })
+
+      if (response.ok) {
+        setContactSubmitStatus('success')
+        // Reset form
+        setContactFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setContactSubmitStatus('error')
+      }
+    } catch (error) {
+      setContactSubmitStatus('error')
+    } finally {
+      setIsContactSubmitting(false)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -116,7 +173,7 @@ function App() {
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Order Book</button>
               <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">About Us</button>
               <button onClick={scrollToDownload} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Download</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Contact Us</a>
+              <button onClick={scrollToContact} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Contact Us</button>
             </nav>
             
             {/* Burger Menu Button */}
@@ -138,7 +195,7 @@ function App() {
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Order Book</button>
               <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">About Us</button>
               <button onClick={scrollToDownload} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Download</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">Contact Us</a>
+              <button onClick={scrollToContact} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Contact Us</button>
             </div>
           </nav>
         </div>
@@ -638,6 +695,199 @@ function App() {
                   This app is only available for Android phones (Android 7.0 or higher)
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Us Section */}
+      <section id="contact" className="min-h-screen bg-stone-50 py-16">
+        <div className="max-w-7xl mx-auto px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-800 mb-6">
+              Contact Us
+            </h2>
+            <p className="text-xl text-orange-600 max-w-3xl mx-auto leading-relaxed">
+              Have questions about Animal Tales? We'd love to hear from you!
+            </p>
+          </div>
+          
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Contact Info */}
+            <div className="space-y-8">
+              {/* Hero Image with Overlay Text */}
+              <div className="relative rounded-2xl overflow-hidden">
+                <img 
+                  src={lyceImage} 
+                  alt="We're Here to Help" 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30 flex items-center">
+                  <div className="text-white p-8">
+                    <h3 className="text-2xl font-bold mb-2">We're Here to Help!</h3>
+                    <p className="text-sm opacity-90">Our team is ready to assist you with any questions about Animal Tales.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Cards */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Email Support Card */}
+                <div className="bg-white rounded-2xl shadow-lg p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                      <EnvelopeIcon className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h4 className="text-lg font-bold text-amber-800">Email Support</h4>
+                  </div>
+                  <p className="text-sm text-amber-700 mb-3">Get help via email</p>
+                  <a href="mailto:animtalescorp@gmail.com" className="text-orange-600 font-semibold text-sm hover:text-orange-700 transition-colors">
+                    animtalescorp@gmail.com
+                  </a>
+                </div>
+
+                {/* Phone Support Card */}
+                <div className="bg-white rounded-2xl shadow-lg p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <PhoneIcon className="w-5 h-5 text-green-600" />
+                    </div>
+                    <h4 className="text-lg font-bold text-amber-800">Phone Support</h4>
+                  </div>
+                  <p className="text-sm text-amber-700 mb-3">Call us for more complex questions</p>
+                  <a href="tel:09062329689" className="text-orange-600 font-semibold text-sm hover:text-orange-700 transition-colors">
+                    0906-232-9689
+                  </a>
+                </div>
+              </div>
+
+              {/* Office Hours */}
+              <div className="bg-white rounded-2xl shadow-lg p-6">
+                <h4 className="text-lg font-bold text-amber-800 mb-4">Office Hours</h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-orange-600 font-medium">Monday - Friday:</span>
+                    <span className="text-amber-700">9:00 AM - 6:00 PM EST</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-orange-600 font-medium">Saturday:</span>
+                    <span className="text-amber-700">10:00 AM - 4:00 PM EST</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-orange-600 font-medium">Sunday:</span>
+                    <span className="text-amber-700">Closed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Side - Contact Form */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-amber-800 mb-6">Send us a Message</h3>
+              
+              {/* Success Message */}
+              {contactSubmitStatus === 'success' && (
+                <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <CheckIcon className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-green-800 mb-1">Message Sent Successfully!</h4>
+                      <p className="text-sm text-green-700">
+                        Thank you for contacting us. We'll get back to you soon.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Error Message */}
+              {contactSubmitStatus === 'error' && (
+                <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-red-800 mb-1">Message Failed to Send</h4>
+                      <p className="text-sm text-red-700">
+                        There was an error sending your message. Please try again.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                {/* Name and Email Row */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-orange-600 mb-2">Your Name</label>
+                    <input 
+                      type="text"
+                      name="name"
+                      value={contactFormData.name}
+                      onChange={handleContactInputChange}
+                      placeholder="Enter your name"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-orange-600 mb-2">Email Address</label>
+                    <input 
+                      type="email"
+                      name="email"
+                      value={contactFormData.email}
+                      onChange={handleContactInputChange}
+                      placeholder="Enter your email"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+                
+                {/* Subject */}
+                <div>
+                  <label className="block text-sm font-medium text-orange-600 mb-2">Subject</label>
+                  <input 
+                    type="text"
+                    name="subject"
+                    value={contactFormData.subject}
+                    onChange={handleContactInputChange}
+                    placeholder="What's this about?"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                </div>
+                
+                {/* Message */}
+                <div>
+                  <label className="block text-sm font-medium text-orange-600 mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    value={contactFormData.message}
+                    onChange={handleContactInputChange}
+                    placeholder="Tell us how we can help you..."
+                    rows={6}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                  ></textarea>
+                  <div className="text-right mt-2">
+                    <span className="text-sm text-gray-500">{contactFormData.message.length}/500 characters</span>
+                  </div>
+                </div>
+                
+                {/* Submit Button */}
+                <button 
+                  type="submit"
+                  disabled={isContactSubmitting}
+                  className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-lg transition-colors text-lg"
+                >
+                  {isContactSubmitting ? 'Sending Message...' : 'Send Message'}
+                </button>
+              </form>
             </div>
           </div>
         </div>
