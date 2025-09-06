@@ -5,6 +5,7 @@ import homeBgImage from './assets/Web UI Inspo/home-bg-image.png'
 import bookImage from './assets/Book Selling 2.png'
 import lyceImage from './assets/lyce.jpg'
 import sophiaAndDocImage from './assets/sophia_and_doc.jpeg'
+import appImage from './assets/app_image.png'
 import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
 
 function App() {
@@ -40,6 +41,11 @@ function App() {
 
   const scrollToAboutUs = () => {
     const element = document.getElementById('about-us')
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToDownload = () => {
+    const element = document.getElementById('download')
     element?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -109,7 +115,7 @@ function App() {
               <button onClick={scrollToHome} className="text-white font-medium hover:text-white/90 transition-all duration-200 border-b-2 border-white">Home</button>
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Order Book</button>
               <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">About Us</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Download</a>
+              <button onClick={scrollToDownload} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Download</button>
               <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Contact Us</a>
             </nav>
             
@@ -131,7 +137,7 @@ function App() {
               <button onClick={scrollToHome} className="text-white font-medium hover:text-white/90 transition-colors duration-200 py-1 border-l-2 border-white pl-3 text-left">Home</button>
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Order Book</button>
               <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">About Us</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">Download</a>
+              <button onClick={scrollToDownload} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Download</button>
               <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">Contact Us</a>
             </div>
           </nav>
@@ -475,6 +481,162 @@ function App() {
                     Interactive storytelling with 3D models and immersive AR experiences
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Download Section */}
+      <section id="download" className="min-h-screen bg-stone-50 py-16">
+        <div className="max-w-7xl mx-auto px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-800 mb-6">
+              Download Animal Tales
+            </h2>
+            <p className="text-xl text-orange-600 max-w-3xl mx-auto leading-relaxed">
+              Start your wilderness adventure today! Choose from our available download options
+            </p>
+          </div>
+          
+          {/* Download Cards */}
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Full Version Card */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="p-6">
+                <img 
+                  src={appImage} 
+                  alt="Animal Tales Full Version" 
+                  className="w-full rounded-lg mb-6"
+                />
+                <h3 className="text-xl font-bold text-amber-800 mb-3">Full Version</h3>
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">Augmented Reality Experience</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">View 3D Animated Scenes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">Audio Playback of the Full Story</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">Complete Lesson Plan Scenes</span>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    const link = document.createElement('a')
+                    link.href = 'https://mygov-rds.s3.ap-southeast-1.amazonaws.com/AnimalTales-v0.1.apk'
+                    link.download = 'AnimalTales-v0.1.apk'
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                  }}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <ArrowDownTrayIcon className="w-5 h-5" />
+                  Download APK
+                </button>
+              </div>
+            </div>
+
+            {/* Trial Version Card */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="p-6">
+                <img 
+                  src={appImage} 
+                  alt="Animal Tales Trial Version" 
+                  className="w-full rounded-lg mb-6"
+                />
+                <h3 className="text-xl font-bold text-amber-800 mb-3">Trial Version</h3>
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">Augmented Reality Experience</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">View 1 Sample 3D Animated Scenes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <XMarkIcon className="w-4 h-4 text-red-500" />
+                    <span className="text-amber-700 text-sm">Audio Playback of the Full Story</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <XMarkIcon className="w-4 h-4 text-red-500" />
+                    <span className="text-amber-700 text-sm">Complete Lesson Plan Scenes</span>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    const link = document.createElement('a')
+                    link.href = 'https://mygov-rds.s3.ap-southeast-1.amazonaws.com/AnimalTales-Demo-v0.2.apk'
+                    link.download = 'AnimalTales-Demo-v0.2.apk'
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                  }}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <ArrowDownTrayIcon className="w-5 h-5" />
+                  Download APK
+                </button>
+              </div>
+            </div>
+
+            {/* Trial Image Card */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="p-6 flex flex-col h-full">
+                <img 
+                  src={appImage} 
+                  alt="Animal Tales Preview" 
+                  className="w-full rounded-lg mb-6"
+                />
+                <h3 className="text-xl font-bold text-amber-800 mb-3">Trial Image</h3>
+                <div className="space-y-2 mb-6 flex-1">
+                  <div className="flex items-center gap-2">
+                    <CheckIcon className="w-4 h-4 text-green-500" />
+                    <span className="text-amber-700 text-sm">1 Sample Image for the Trial Version</span>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    const link = document.createElement('a')
+                    link.href = '/Test Page.png'
+                    link.download = 'Test Page.png'
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                  }}
+                  className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                  Download Image
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Android Notice */}
+          <div className="flex justify-center">
+            <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-lg inline-flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-5 h-5 bg-orange-400 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">!</span>
+                </div>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-orange-700">
+                  This app is only available for Android phones (Android 7.0 or higher)
+                </p>
               </div>
             </div>
           </div>
