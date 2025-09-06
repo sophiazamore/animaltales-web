@@ -5,7 +5,6 @@ import homeBgImage from './assets/Web UI Inspo/home-bg-image.png'
 import bookImage from './assets/Book Selling 2.png'
 import lyceImage from './assets/lyce.jpg'
 import sophiaAndDocImage from './assets/sophia_and_doc.jpeg'
-import appImage from './assets/app_image.png'
 import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon, BookOpenIcon, AcademicCapIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/solid'
 
 function App() {
