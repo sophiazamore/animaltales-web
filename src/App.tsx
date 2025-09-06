@@ -649,7 +649,7 @@ function App() {
                 <button 
                   onClick={() => {
                     const link = document.createElement('a')
-                    link.href = '/Test Page.png'
+                    link.href = 'https://mygov-rds.s3.ap-southeast-1.amazonaws.com/Test+Page.png'
                     link.download = 'Test Page.png'
                     document.body.appendChild(link)
                     link.click()
