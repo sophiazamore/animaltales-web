@@ -3,7 +3,9 @@ import './App.css'
 import appLogo from './assets/App Logo.png'
 import homeBgImage from './assets/Web UI Inspo/home-bg-image.png'
 import bookImage from './assets/Book Selling 2.png'
-import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import lyceImage from './assets/lyce.jpg'
+import sophiaAndDocImage from './assets/sophia_and_doc.jpeg'
+import { ArrowDownTrayIcon, PlayIcon, MinusIcon, PlusIcon, CheckIcon, XMarkIcon, BookOpenIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,6 +36,11 @@ function App() {
 
   const closeVideoModal = () => {
     setIsVideoModalOpen(false)
+  }
+
+  const scrollToAboutUs = () => {
+    const element = document.getElementById('about-us')
+    element?.scrollIntoView({ behavior: 'smooth' })
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -86,24 +93,22 @@ function App() {
   }
   return (
     <div>
-      {/* Hero Section with Background */}
-      <div className="min-h-screen relative" style={{backgroundImage: `url(${homeBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
-        {/* Background overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30"></div>
-        
-        <header className="bg-orange-500/90 backdrop-blur-md sticky top-0 z-50 py-4">
+      {/* Sticky Header */}
+      <header className="bg-orange-500/90 backdrop-blur-md sticky top-0 z-50 py-4">
         <div className="max-w-6xl mx-auto px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 text-xl font-bold text-white">
               <img src={appLogo} alt="Animal Tales Logo" className="w-10 h-10 rounded-lg" />
-              Animal Tales
+              <span style={{fontFamily: 'Dancing Script, Brush Script MT, Lucida Handwriting, cursive'}}>
+                Animal Tales
+              </span>
             </div>
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-8">
               <button onClick={scrollToHome} className="text-white font-medium hover:text-white/90 transition-all duration-200 border-b-2 border-white">Home</button>
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Order Book</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">About Us</a>
+              <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">About Us</button>
               <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Download</a>
               <a href="#" className="text-white/90 font-medium hover:text-white hover:border-white transition-all duration-200 border-b-2 border-transparent">Contact Us</a>
             </nav>
@@ -125,15 +130,20 @@ function App() {
             <div className="flex flex-col gap-4 py-4 border-t border-white/20">
               <button onClick={scrollToHome} className="text-white font-medium hover:text-white/90 transition-colors duration-200 py-1 border-l-2 border-white pl-3 text-left">Home</button>
               <button onClick={scrollToOrderBook} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">Order Book</button>
-              <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">About Us</a>
+              <button onClick={scrollToAboutUs} className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2 text-left">About Us</button>
               <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">Download</a>
               <a href="#" className="text-white/90 font-medium hover:text-white transition-colors duration-200 py-1 hover:border-white hover:pl-3 hover:border-l-2">Contact Us</a>
             </div>
           </nav>
         </div>
       </header>
-      
-      <main className="flex items-center justify-center min-h-[calc(100vh-80px)] relative z-5 text-center px-8">
+
+      {/* Hero Section with Background */}
+      <div className="min-h-screen relative" style={{backgroundImage: `url(${homeBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
+        {/* Background overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30"></div>
+        
+        <main className="flex items-center justify-center min-h-screen relative z-5 text-center px-8">
         <div className="max-w-4xl text-white">
           <h1 className="text-5xl md:text-7xl font-normal mb-2 text-white drop-shadow-md" style={{fontFamily: 'Dancing Script, Brush Script MT, Lucida Handwriting, cursive'}}>
             Animal Tales
@@ -381,6 +391,91 @@ function App() {
                   {isSubmitting ? 'Submitting Order...' : 'Place Order'}
                 </button>
               </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about-us" className="min-h-screen bg-stone-50 py-16">
+        <div className="max-w-7xl mx-auto px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-800 mb-6">
+              About Animal Tales
+            </h2>
+            <p className="text-xl text-orange-600 max-w-3xl mx-auto leading-relaxed">
+              Discover the magical world of learning through Augmented Reality
+            </p>
+          </div>
+          
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Images */}
+            <div className="space-y-6">
+              <img 
+                src={lyceImage} 
+                alt="About Animal Tales" 
+                className="w-full h-60 object-cover rounded-2xl shadow-lg"
+              />
+              <img 
+                src={sophiaAndDocImage} 
+                alt="About Animal Tales" 
+                className="w-full h-60 object-cover rounded-2xl shadow-lg"
+              />
+            </div>
+            
+            {/* Right Side - Content */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-3xl font-bold text-amber-800 mb-6">Our Story</h3>
+                
+                <div className="space-y-4 text-amber-700 leading-relaxed mb-8">
+                  <p>
+                    We are two college students who began Animal Tales as part of our 
+                    Capstone thesis. What started as an academic project quickly grew 
+                    into something more personal. Inspired by our younger sisters' love 
+                    for smartphones, we wanted to create an experience that was fun, 
+                    engaging, and meaningful.
+                  </p>
+                  
+                  <p>
+                    With little kids in mind, we set out to blend play with learning through 
+                    Augmented Reality. Focusing on the Animal Kingdom in science, we 
+                    built an app that brings stories to life with 3D animated models and 
+                    audio narration. Seeing our sisters enjoy and learn from it encouraged 
+                    us to share Animal Tales with more children.
+                  </p>
+                </div>
+              </div>
+              
+              {/* Feature Cards - Right Side */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-white rounded-2xl shadow-lg p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <AcademicCapIcon className="w-5 h-5 text-green-600" />
+                    </div>
+                    
+                    <h4 className="text-lg font-bold text-amber-800">Educational Content</h4>
+                  </div>
+                  <p className="text-sm text-amber-700">
+                    Aligned with the DepEd Science curriculum on the Animal Kingdom
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-2xl shadow-lg p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                      <BookOpenIcon className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <h4 className="text-lg font-bold text-amber-800">AR Experience</h4>
+                  </div>
+                  <p className="text-sm text-amber-700">
+                    Interactive storytelling with 3D models and immersive AR experiences
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
