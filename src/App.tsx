@@ -647,20 +647,30 @@ function App() {
                   </div>
                 </div>
                 <button 
-                  onClick={() => {
-                    const link = document.createElement('a')
-                    link.href = 'https://mygov-rds.s3.ap-southeast-1.amazonaws.com/Test+Page.png'
-                    link.download = 'Test Page.png'
-                    document.body.appendChild(link)
-                    link.click()
-                    document.body.removeChild(link)
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('https://mygov-rds.s3.ap-southeast-1.amazonaws.com/Test+Page.png')
+                      const blob = await response.blob()
+                      const url = window.URL.createObjectURL(blob)
+                      const link = document.createElement('a')
+                      link.href = url
+                      link.download = 'Test Page.png'
+                      document.body.appendChild(link)
+                      link.click()
+                      document.body.removeChild(link)
+                      window.URL.revokeObjectURL(url)
+                    } catch (error) {
+                      console.error('Download failed:', error)
+                      // Fallback to direct link
+                      window.open('https://mygov-rds.s3.ap-southeast-1.amazonaws.com/Test+Page.png', '_blank')
+                    }
                   }}
                   className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
                   </svg>
-                  Download Image
+                  View Image
                 </button>
               </div>
             </div>
